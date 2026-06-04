@@ -1,0 +1,737 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VITESAN</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+    color:#021b45;
+}
+
+/* ===================== */
+/* MENU */
+/* ===================== */
+
+.sidebar{
+    width:260px;
+    height:100vh;
+    background:#021b45;
+    position:fixed;
+    left:0;
+    top:0;
+    padding:20px;
+    color:white;
+    transition:0.4s;
+    overflow-y:auto;
+    z-index:999;
+}
+
+.sidebar img{
+    width:110px;
+    display:block;
+    margin:auto;
+}
+
+.sidebar h1{
+    text-align:center;
+    margin-top:10px;
+    font-size:38px;
+}
+
+.sidebar p{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.menu button{
+    width:100%;
+    padding:15px;
+    margin:8px 0;
+    border:none;
+    background:transparent;
+    color:white;
+    border-radius:12px;
+    text-align:left;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.menu button:hover{
+    background:#e3122c;
+}
+
+.menu i{
+    margin-right:10px;
+}
+
+/* ===================== */
+/* BOTON MENU */
+/* ===================== */
+
+.menu-toggle{
+    display:none;
+}
+
+/* ===================== */
+/* CONTENIDO */
+/* ===================== */
+
+.contenido{
+    margin-left:260px;
+    padding:20px;
+}
+
+/* ===================== */
+/* HEADER */
+/* ===================== */
+
+.header{
+    background:white;
+    padding:20px;
+    border-radius:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+.header h2{
+    font-size:30px;
+}
+
+/* ===================== */
+/* SECCIONES */
+/* ===================== */
+
+.seccion{
+    display:none;
+}
+
+.activa{
+    display:block;
+}
+
+/* ===================== */
+/* TARJETAS */
+/* ===================== */
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    margin-bottom:20px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+.card h2{
+    margin-bottom:20px;
+}
+
+/* ===================== */
+/* FORMULARIOS */
+/* ===================== */
+
+input,
+textarea,
+select{
+    width:100%;
+    padding:15px;
+    border:1px solid #ccc;
+    border-radius:12px;
+    margin-bottom:15px;
+    font-size:16px;
+}
+
+textarea{
+    resize:none;
+}
+
+/* ===================== */
+/* BOTONES */
+/* ===================== */
+
+.btn{
+    background:#e3122c;
+    color:white;
+    border:none;
+    padding:15px;
+    border-radius:12px;
+    width:100%;
+    font-size:17px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:#b10d22;
+}
+
+/* ===================== */
+/* PERFIL */
+/* ===================== */
+
+.perfil{
+    text-align:center;
+}
+
+.perfil img{
+    width:120px;
+    border-radius:50%;
+    margin-bottom:20px;
+}
+
+.perfil h3{
+    margin-bottom:10px;
+}
+
+/* ===================== */
+/* MAPA */
+/* ===================== */
+
+#imagenMapa{
+    width:100%;
+    border-radius:15px;
+    margin-top:20px;
+}
+
+/* ===================== */
+/* FOOTER */
+/* ===================== */
+
+footer{
+    background:#021b45;
+    color:white;
+    padding:25px;
+    border-radius:20px;
+    text-align:center;
+}
+
+footer i{
+    font-size:25px;
+    margin:10px;
+}
+
+/* ===================== */
+/* MODO OSCURO */
+/* ===================== */
+
+.dark{
+    background:#111827;
+    color:white;
+}
+
+.dark .card,
+.dark .header{
+    background:#1f2937;
+    color:white;
+}
+
+.dark input,
+.dark textarea,
+.dark select{
+    background:#374151;
+    color:white;
+    border:none;
+}
+
+/* ===================== */
+/* RESPONSIVE */
+/* ===================== */
+
+@media screen and (max-width:900px){
+
+    .menu-toggle{
+        display:block;
+        position:fixed;
+        top:15px;
+        left:15px;
+        background:#e3122c;
+        color:white;
+        border:none;
+        padding:12px 15px;
+        border-radius:10px;
+        font-size:22px;
+        z-index:1000;
+    }
+
+    .sidebar{
+        left:-100%;
+        width:250px;
+    }
+
+    .sidebar.activo{
+        left:0;
+    }
+
+    .contenido{
+        margin-left:0;
+        padding:80px 15px 15px 15px;
+    }
+
+    .header{
+        flex-direction:column;
+        text-align:center;
+        gap:10px;
+    }
+
+    .header h2{
+        font-size:24px;
+    }
+
+    .card{
+        padding:20px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- BOTON MENU -->
+
+<button class="menu-toggle"
+onclick="toggleMenu()">
+MENU
+</button>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+
+<h1>VITESAN</h1>
+
+<p>Sistema de alerta de robo</p>
+
+<div class="menu">
+
+<button onclick="mostrar('inicio')">
+<i class="fa-solid fa-house"></i>
+Inicio
+</button>
+
+<button onclick="mostrar('cuenta')">
+<i class="fa-solid fa-user-plus"></i>
+Crear Cuenta
+</button>
+
+<button onclick="mostrar('perfil')">
+<i class="fa-solid fa-user"></i>
+Mi Perfil
+</button>
+
+<button onclick="mostrar('estaciones')">
+<i class="fa-solid fa-train"></i>
+Estaciones
+</button>
+
+<button onclick="mostrar('seguridad')">
+<i class="fa-solid fa-shield"></i>
+Seguridad
+</button>
+
+<button onclick="mostrar('configuracion')">
+<i class="fa-solid fa-gear"></i>
+Configuraci&oacute;n
+</button>
+
+<button onclick="salir()">
+<i class="fa-solid fa-right-from-bracket"></i>
+Salir
+</button>
+
+</div>
+
+</div>
+
+<!-- CONTENIDO -->
+
+<div class="contenido">
+
+<!-- HEADER -->
+
+<div class="header">
+
+<h2 id="tituloIdioma">
+Tu seguridad, nuestra prioridad
+</h2>
+
+<div>
+<i class="fa-solid fa-bell"></i>
+Usuario en l&iacute;nea
+</div>
+
+</div>
+
+<!-- INICIO -->
+
+<div id="inicio" class="seccion activa">
+
+<div class="card">
+
+<h2>Sobre el proyecto</h2>
+
+
+
+Este proyecto proporciona un Sistema creado para la implementaci&oacute;n del pr&oacute;ximo Cablebus que ser&aacute; instalado en la ciudad. El sistema esta dividido en dos partes; la primera, un sistema de recorridos y traslados que menciona dentro de un mapa el recorrido indicado que marcara cada estaci&oacute;n del cablebus, donde se visualizan:
+<br><br><ul>
+ <li>Mapeo de traslados de cada estaci&oacute;n 
+<li>Numero de unidad 
+<li> Llegada a la base  
+ <li>Velocidad en que se traslada entre estaciones 
+<li< N&uacute;mero de pasajeros.
+</ul> 
+<br><br>
+La segunda parte se basa en un Sistema de alerta de robo dentro de cada estaci&oacute;n del cablebus, donde en cada registro de emergencia un operador utiliza el sistema para detectar le ubicaci&oacute;n del dispositivo por medio del usuario registrado, maneja la captura de &aacute;reas de c&aacute;maras de vigilancia asi como una asistencia remota de una unidad de polic&iacute;a hacia la ubicaci&oacute;n detectada. 
+
+
+
+</div>
+
+</div>
+
+<!-- CREAR CUENTA -->
+
+<div id="cuenta" class="seccion">
+
+<div class="card">
+
+<h2>Crear Cuenta</h2>
+
+<input type="text"
+id="nombre"
+placeholder="Nombre">
+
+<input type="text"
+id="apellido"
+placeholder="Apellidos">
+
+<input type="email"
+id="correo"
+placeholder="Correo electr&oacute;nico">
+
+<input type="password"
+id="password"
+placeholder="Contrasena">
+
+<input type="tel"
+id="telefono"
+placeholder="N&uacute;mero de tel&eacute;fono">
+
+<button class="btn"
+onclick="registrar()">
+Registrarse
+</button>
+
+</div>
+
+</div>
+
+<!-- PERFIL -->
+
+<div id="perfil" class="seccion">
+
+<div class="card perfil">
+
+<h2>Mi Perfil</h2>
+
+<img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">
+
+<h3 id="perfilNombre">
+Usuario
+</h3>
+
+<p id="perfilCorreo">
+correo@email.com
+</p>
+
+<p id="perfilTelefono">
+2220000000
+</p>
+
+</div>
+
+</div>
+
+<!-- ESTACIONES -->
+
+<div id="estaciones" class="seccion">
+
+<div class="card">
+
+<h2>Mapa de rutas</h2>
+
+<p>
+Puedes cambiar la imagen del mapa.
+</p>
+
+<img
+id="imagenMapa"
+src="mapa.jpg"
+alt="Mapa de rutas">
+
+<br><br>
+
+<input type="text"
+id="nuevoMapa"
+placeholder="Ejemplo: rutas.png">
+
+<button class="btn"
+onclick="cambiarImagen()">
+Actualizar Imagen
+</button>
+
+</div>
+
+</div>
+
+<!-- SEGURIDAD -->
+
+<div id="seguridad" class="seccion">
+
+<div class="card">
+
+<h2>Informaci&oacute;n policial</h2>
+
+<ul>
+
+<li>Estaci&oacute;n de Polic&iacute;a Central
+
+<li>Direcci&oacute;n:
+Av. Principal #123
+
+<li>Tel&eacute;fono:
+222-000-0000
+
+<li>Horario:
+24 horas
+
+
+</ul>
+</div>
+
+</div>
+
+<!-- CONFIGURACION -->
+
+<div id="configuracion"
+class="seccion">
+
+<div class="card">
+
+<h2>Configuracion</h2>
+
+<label>Idioma</label>
+
+<select onchange="cambiarIdioma(this.value)">
+
+<option value="es">
+Espanol
+</option>
+
+<option value="en">
+English
+</option>
+
+</select>
+
+<br><br>
+
+<label>Modo</label>
+
+<select onchange="modo(this.value)">
+
+<option value="claro">
+Claro
+</option>
+
+<option value="oscuro">
+Oscuro
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+
+<h2>VITESAN</h2>
+
+<p>
+Tu seguridad es nuestra prioridad.
+</p>
+
+<i class="fa-brands fa-facebook"></i>
+<i class="fa-brands fa-instagram"></i>
+<i class="fa-brands fa-twitter"></i>
+
+</footer>
+
+</div>
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+/* MENU */
+
+function toggleMenu(){
+
+document.querySelector(".sidebar")
+.classList.toggle("activo");
+
+}
+
+/* CAMBIAR SECCIONES */
+
+function mostrar(id){
+
+let secciones =
+document.querySelectorAll(".seccion");
+
+secciones.forEach(sec =>{
+
+sec.classList.remove("activa");
+
+});
+
+document.getElementById(id)
+.classList.add("activa");
+
+/* cerrar menu en celular */
+
+document.querySelector(".sidebar")
+.classList.remove("activo");
+
+}
+
+/* REGISTRO */
+
+function registrar(){
+
+let nombre =
+document.getElementById("nombre").value;
+
+let apellido =
+document.getElementById("apellido").value;
+
+let correo =
+document.getElementById("correo").value;
+
+let telefono =
+document.getElementById("telefono").value;
+
+document.getElementById("perfilNombre")
+.innerHTML =
+nombre + " " + apellido;
+
+document.getElementById("perfilCorreo")
+.innerHTML =
+correo;
+
+document.getElementById("perfilTelefono")
+.innerHTML =
+telefono;
+
+alert("Cuenta creada correctamente");
+
+mostrar("perfil");
+
+}
+
+/* MAPA */
+
+function cambiarImagen(){
+
+let imagen =
+document.getElementById("nuevoMapa").value;
+
+document.getElementById("imagenMapa")
+.src = imagen;
+
+alert("Mapa actualizado");
+
+}
+
+/* PROYECTO */
+
+function guardarProyecto(){
+
+alert("Información guardada");
+
+}
+
+/* IDIOMA */
+
+function cambiarIdioma(valor){
+
+if(valor == "en"){
+
+document.getElementById("tituloIdioma")
+.innerHTML =
+"Your safety, our priority";
+
+}else{
+
+document.getElementById("tituloIdioma")
+.innerHTML =
+"Tu seguridad, nuestra prioridad";
+
+}
+
+}
+
+/* MODO */
+
+function modo(valor){
+
+if(valor == "oscuro"){
+
+document.body.classList.add("dark");
+
+}else{
+
+document.body.classList.remove("dark");
+
+}
+
+}
+
+/* SALIR */
+
+function salir(){
+
+alert("Sesi&oacute;n cerrada");
+
+location.reload();
+
+}
+
+</script>
+
+</body>
+</html>
+
